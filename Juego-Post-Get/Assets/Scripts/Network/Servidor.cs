@@ -21,7 +21,8 @@ public class Servidor : MonoBehaviour
                 " y la ip " + direccion_escolta.Address);
         }
         else
-        {
+        {   
+            conexiones = new NativeList<NetworkConnection>(4,Allocator.Persistent);
             net_driver.Listen();
             Debug.Log("SERVER:: Escuchando el puerto " + direccion_escolta.Port +
                 " y la ip " + direccion_escolta.Address);
@@ -41,7 +42,26 @@ public class Servidor : MonoBehaviour
         {
             DataStreamReader stream_lectura;
             NetworkEvent.Type net_event_type =  net_driver.PopEventForConnection(conexiones[k], out stream_lectura);
+            while (net_event_type != NetworkEvent.Type.Empty)
+            {
+                switch (net_event_type)
+                {
+                    case NetworkEvent.Type.Data:
+                        FixedString128Bytes text =  stream_lectura.ReadFixedString128();
+                        Debug.Log("SERVIDOR: Respuesta" + text);
+                        break;
+                    case NetworkEvent.Type.Disconnect:
+                        conexiones[k] = default(NetworkConnection);
 
+                        break;
+
+                    default:
+                        Debug.Log("SERVIDOR: Evento desconectado" + net_event_type);
+                        break;
+
+                }
+                net_driver.PopEventForConnection(conexiones[k], out stream_lectura);
+            }
 
         }
     }

@@ -240,6 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputFieldNombreUsuario: {fileID: 1986926578}
+  servidor_manager_prefab: {fileID: 3016708662473441488, guid: 8db4bcdb7a87ef24e9bfee00a49428f8, type: 3}
+  cliente_manager_prefab: {fileID: 4709127961446655807, guid: 0b8e21b3fe0ae4f4ca4ecc6febd17b86, type: 3}
 --- !u!1 &413893415
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +592,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 470988240}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 401029197}
+        m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
+        m_MethodName: clickStartServidor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &470988240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1057,7 +1071,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 902148723}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 401029197}
+        m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
+        m_MethodName: clickStartClient
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &902148723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1624,8 +1650,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 22.489609}
-  m_SizeDelta: {x: 0, y: -268.4242}
+  m_AnchoredPosition: {x: 0, y: 18.9416}
+  m_SizeDelta: {x: 0, y: -286.8741}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1482993621
 MonoBehaviour:

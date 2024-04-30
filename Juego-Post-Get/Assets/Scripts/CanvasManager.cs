@@ -65,4 +65,30 @@ public class CanvasManager : MonoBehaviour
         }
 
     }
+    [SerializeField] private GameObject servidor_manager_prefab;
+    private GameObject servidor_manager;
+    public void clickStartServidor()
+    {
+        if (!servidor_manager)
+        {
+            servidor_manager = Instantiate(servidor_manager_prefab);
+        }
+        else
+        {
+            Destroy(servidor_manager );
+        }
+    }
+    [SerializeField] private GameObject cliente_manager_prefab;
+    private GameObject cliente_manager;
+    public void clickStartClient()
+    {
+        if (!cliente_manager)
+        {
+            cliente_manager = Instantiate(cliente_manager_prefab);
+        }
+        else
+        {
+            Destroy(cliente_manager );
+        }
+    }
 }
