@@ -37,7 +37,11 @@ public class Cliente : MonoBehaviour
     }
      private void checkConexion()
     {
-        Debug.Log("CLIENTE:: Error de conexion con el servidor");
+        if(!conexion.IsCreated)
+        {
+            Debug.Log("CLIENTE:: Error de conexion con el servidor");
+
+        }
     }
 
     public void leerMensajesRecibidos()
