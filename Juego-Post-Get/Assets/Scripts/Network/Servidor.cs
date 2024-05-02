@@ -32,6 +32,7 @@ public class Servidor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        net_driver.ScheduleUpdate().Complete();
         GestionaConexiones();
         LeerMensajesRecibidos();
 
@@ -60,7 +61,7 @@ public class Servidor : MonoBehaviour
                         break;
 
                 }
-                net_driver.PopEventForConnection(conexiones[k], out stream_lectura);
+             net_event_type=   net_driver.PopEventForConnection(conexiones[k], out stream_lectura);
             }
 
         }
@@ -68,11 +69,11 @@ public class Servidor : MonoBehaviour
     private NativeList<NetworkConnection> conexiones;
     private void GestionaConexiones()
     {
-        net_driver.ScheduleUpdate().Complete();
+       
 
         for(int k = 0; k<conexiones.Length; k++)
         {
-            if (conexiones[k].IsCreated)
+            if (!conexiones[k].IsCreated)
             {
                 conexiones.RemoveAtSwapBack(k);
                 k--;
@@ -88,6 +89,7 @@ public class Servidor : MonoBehaviour
 
             nueva_conexion = net_driver.Accept();
         }
+
     }
     private void OnDestroy()
     {
