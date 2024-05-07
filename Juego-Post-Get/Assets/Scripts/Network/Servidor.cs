@@ -50,6 +50,8 @@ public class Servidor : MonoBehaviour
                     case NetworkEvent.Type.Data:
                         FixedString128Bytes text =  stream_lectura.ReadFixedString128();
                         Debug.Log("SERVIDOR: Respuesta" + text);
+                        Broadcast(text.ToString());
+
                         break;
                     case NetworkEvent.Type.Disconnect:
                         conexiones[k] = default(NetworkConnection);
@@ -66,10 +68,23 @@ public class Servidor : MonoBehaviour
 
         }
     }
+
+    private void Broadcast(string text)
+    {
+           for(int i=0; i>conexiones.Length; i++)
+        {
+            if (conexiones[i].IsCreated)
+            {
+                Debug.Log("SERVER:: Broadcast::"+ text);
+                net_driver.BeginSend(NetworkPipeline.Null, conexiones[i], out var stream_escritura);
+                stream_escritura.WriteFixedString128("- " + text);
+                net_driver.EndSend(stream_escritura);
+            }
+        }
+    }
     private NativeList<NetworkConnection> conexiones;
     private void GestionaConexiones()
     {
-       
 
         for(int k = 0; k<conexiones.Length; k++)
         {

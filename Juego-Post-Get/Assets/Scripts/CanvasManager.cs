@@ -6,7 +6,16 @@ using TMPro;
 public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private TMP_InputField inputFieldNombreUsuario;
+    [SerializeField] private TMP_InputField inputFieldTextMsg;
+    [SerializeField] private TextMeshProUGUI contenidoChat;
+
+
     public static CanvasManager Instance;
+
+    public void AddTextChat(string text)
+    {
+        contenidoChat.text += "\n" + text;
+    }
     public void Awake()
     {
         if (Instance == null)
@@ -91,4 +100,10 @@ public class CanvasManager : MonoBehaviour
             Destroy(cliente_manager );
         }
     }
+
+    public void clickButtonSendMsgServer() {
+        cliente_manager.GetComponent<Cliente>().SendMessageServer(inputFieldTextMsg.text.ToString());
+
+    }
+
 }

@@ -60,6 +60,7 @@ public class Cliente : MonoBehaviour
 
                     FixedString128Bytes txt = stream_lectura.ReadFixedString128();
                     Debug.Log("CLIENTE::Ha recibido mensaje del servidor:" + txt);
+                    CanvasManager.Instance.AddTextChat(txt.ToString());
 
                     break;
                 case NetworkEvent.Type.Disconnect:
