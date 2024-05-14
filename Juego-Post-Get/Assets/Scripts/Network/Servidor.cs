@@ -72,7 +72,7 @@ public class Servidor : MonoBehaviour
     private void Broadcast(string text)
     {
            for(int i=0; i>conexiones.Length; i++)
-        {
+           {
             if (conexiones[i].IsCreated)
             {
                 Debug.Log("SERVER:: Broadcast::"+ text);

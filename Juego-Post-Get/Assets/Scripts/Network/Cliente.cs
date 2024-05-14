@@ -60,7 +60,16 @@ public class Cliente : MonoBehaviour
 
                     FixedString128Bytes txt = stream_lectura.ReadFixedString128();
                     Debug.Log("CLIENTE::Ha recibido mensaje del servidor:" + txt);
-                    CanvasManager.Instance.AddTextChat(txt.ToString());
+                    ///////
+                    OperacionesNetwork msg = JsonUtility.FromJson<OperacionesNetwork>(txt.ToString());
+
+                    switch(msg.op)
+                    {
+                        case ("text"):
+                            CanvasManager.Instance.AddTextChat("user" + msg.nick + "ha escrito: " + msg.value);
+                            break;
+                    }
+                    //CanvasManager.Instance.AddTextChat(txt.ToString());
 
                     break;
                 case NetworkEvent.Type.Disconnect:
@@ -78,7 +87,14 @@ public class Cliente : MonoBehaviour
     public void SendMessageServer(string txt)
     {
         net_driver.BeginSend(conexion, out var streamEscritura);
-        streamEscritura.WriteFixedString128("TEXTO CLIENTE::" +txt);
+        /////
+        OperacionesNetwork msg = new OperacionesNetwork();
+        msg.op = "text";
+        msg.value = txt;
+        msg.nick = CanvasManager.Instance.inputFieldNombreUsuario.text.ToString();
+        /////
+        //streamEscritura.WriteFixedString128("TEXTO CLIENTE::" +txt);
+        streamEscritura.WriteFixedString128(JsonUtility.ToJson(msg));
         net_driver.EndSend(streamEscritura);
     }
 

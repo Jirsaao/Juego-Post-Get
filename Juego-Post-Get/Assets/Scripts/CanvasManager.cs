@@ -5,10 +5,9 @@ using UnityEngine.Networking;
 using TMPro;
 public class CanvasManager : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField inputFieldNombreUsuario;
+    [SerializeField] public TMP_InputField inputFieldNombreUsuario;
     [SerializeField] private TMP_InputField inputFieldTextMsg;
     [SerializeField] private TextMeshProUGUI contenidoChat;
-
 
     public static CanvasManager Instance;
 
